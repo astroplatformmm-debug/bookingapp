@@ -1,0 +1,78 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  duration    Int       // minutes
+  price       Int       // in paise (INR * 100)
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  slots       Slot[]
+  bookings    Booking[]
+}
+
+model Slot {
+  id        String    @id @default(cuid())
+  serviceId String
+  service   Service   @relation(fields: [serviceId], references: [id])
+  date      DateTime  @db.Date
+  startTime String    // "HH:MM" 24hr
+  endTime   String    // "HH:MM" 24hr
+  isBooked  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  booking   Booking?
+
+  @@unique([serviceId, date, startTime])
+  @@index([date, serviceId])
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  slotId          String        @unique
+  slot            Slot          @relation(fields: [slotId], references: [id])
+  serviceId       String
+  service         Service       @relation(fields: [serviceId], references: [id])
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  notes           String?
+  status          BookingStatus @default(PENDING)
+  paymentId       String?       // Razorpay payment_id
+  orderId         String?       // Razorpay order_id
+  paymentStatus   PaymentStatus @default(UNPAID)
+  amountPaid      Int           // in paise
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([customerEmail])
+  @@index([status])
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // bcrypt hash
+  name      String
+  createdAt DateTime @default(now())
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
