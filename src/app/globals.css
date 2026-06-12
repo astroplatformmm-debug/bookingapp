@@ -1,0 +1,92 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: Georgia, Cambria, serif;
+    --font-body: Inter, system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-deep-800;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-deep-500 hover:bg-deep-600 text-white font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-deep-400 focus:ring-offset-2 active:scale-95;
+  }
+
+  .btn-saffron {
+    @apply bg-saffron hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-saffron focus:ring-offset-2 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-deep-500 text-deep-500 hover:bg-deep-50 font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-deep-400;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-brand-100/60 p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-brand-200 bg-white
+           focus:outline-none focus:ring-2 focus:ring-deep-400 focus:border-transparent
+           placeholder:text-deep-300 text-deep-800 transition-all duration-150;
+  }
+
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-deep-400 mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .badge-green  { @apply badge bg-emerald-100 text-emerald-700; }
+  .badge-yellow { @apply badge bg-amber-100 text-amber-700; }
+  .badge-red    { @apply badge bg-red-100 text-red-700; }
+  .badge-gray   { @apply badge bg-gray-100 text-gray-600; }
+}
+
+@layer utilities {
+  .border-white\/8 { border-color: rgba(255,255,255,0.08); }
+  .text-gradient {
+    @apply bg-gradient-to-r from-saffron via-brand-400 to-saffron bg-clip-text text-transparent;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #080e24 0%, #2f4694 50%, #1b2a5c 100%);
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
