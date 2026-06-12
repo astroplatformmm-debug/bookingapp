@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
-  images: {
-    domains: [],
-  },
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    return config;
   },
 };
 
