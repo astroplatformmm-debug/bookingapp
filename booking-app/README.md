@@ -287,3 +287,5 @@ To auto-generate new slots weekly, add a cron API route and use Vercel Cron:
 ```
 
 Then create `/api/cron/generate-slots/route.ts` that programmatically creates slots for the coming 2 weeks.
+
+Updated
