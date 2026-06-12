@@ -112,7 +112,7 @@ export default function BookPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-gray-950 text-white">
       {/* Header */}
       <header className="px-6 py-4 flex items-center gap-4 border-b border-white/5">
         <button onClick={() => router.push('/')} className="text-white/40 hover:text-white transition-colors">
