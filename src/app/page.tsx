@@ -4,7 +4,7 @@ import { Star, Clock, PhoneCall, ChevronRight, CheckCircle2, Flame, Users, Award
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-gray-950 text-white">
 
       {/* URGENCY BAR */}
       <div className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 text-white text-center py-2.5 text-sm font-semibold tracking-wide">
