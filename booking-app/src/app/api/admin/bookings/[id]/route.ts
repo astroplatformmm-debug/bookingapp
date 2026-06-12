@@ -17,15 +17,21 @@ export async function PATCH(
     return NextResponse.json({ error: 'Invalid status' }, { status: 400 });
   }
 
-  const booking = await prisma.booking.update({
-    where: { id: params.id },
-    data: {
-      status,
-      ...(status === 'CANCELLED' && {
-        slot: { update: { isBooked: false } },
-      }),
-    },
-    include: { service: true, slot: true },
+  const booking = await prisma.$transaction(async (tx) => {
+    const updated = await tx.booking.update({
+      where: { id: params.id },
+      data: { status },
+      include: { service: true, slot: true },
+    });
+
+    if (status === 'CANCELLED') {
+      await tx.slot.update({
+        where: { id: updated.slotId },
+        data: { isBooked: false },
+      });
+    }
+
+    return updated;
   });
 
   return NextResponse.json(booking);
