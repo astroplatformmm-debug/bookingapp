@@ -23,7 +23,7 @@ export default function ConfirmPage() {
   }, [id, router]);
 
   if (loading) return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center">
       <div className="text-center">
         <Loader2 className="w-8 h-8 animate-spin text-amber-400 mx-auto mb-3" />
         <p className="text-white/40">लोड हो रहा है...</p>
@@ -32,7 +32,7 @@ export default function ConfirmPage() {
   );
 
   if (error || !booking) return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
       <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 text-center max-w-sm">
         <p className="text-white/60 mb-4">{error}</p>
         <Link href="/book" className="bg-amber-500 text-black font-bold px-6 py-3 rounded-xl">फिर से बुक करें</Link>
@@ -41,7 +41,7 @@ export default function ConfirmPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-gray-950 text-white">
       <header className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center font-bold text-sm">ॐ</div>
         <span className="font-bold">OMKKAAR Astroworld</span>
